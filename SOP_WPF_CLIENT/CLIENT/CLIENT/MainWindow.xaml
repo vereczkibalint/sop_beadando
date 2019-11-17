@@ -1,0 +1,90 @@
+﻿<Window x:Class="CLIENT.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CLIENT"
+        mc:Ignorable="d"
+        Title="Főprogram" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Resources >
+            <Style TargetType="Border" >
+                <Setter Property="Padding" Value="10 5 10 5" />
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Grid.Row="0">
+            <StackPanel Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="Összes kilistázása" TextAlignment="Center"/>
+                <Button x:Name="btnListAll" Content="List all" Click="btnListAll_Click"/>
+                <ListBox x:Name="listBoxAll" Height="150" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="0">
+            <StackPanel Grid.Column="1" Grid.Row="0">
+                <TextBlock Text="Listázás ID szerint" TextAlignment="Center"/>
+                <Button x:Name="btnListById" Content="List by ID" Click="btnListById_Click"/>
+                <TextBox x:Name="txtListID" Text="ID"/>
+                <ListBox x:Name="listBoxID" Height="50" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="2" Grid.Row="0">
+            <StackPanel Grid.Column="2" Grid.Row="0">
+                <TextBlock Text="Frissítés" TextAlignment="Center"/>
+                <Button x:Name="btnUpdate" Content="Update" Click="BtnUpdate_Click"/>
+                <TextBox x:Name="txtUpdateID" Text="ID"/>
+                <TextBox x:Name="txtUpdateTitle" Text="Title"/>
+                <TextBox x:Name="txtUpdateBody" Text="Body"/>
+                <TextBox x:Name="txtUpdateAuthor" Text="Author"/>
+                <TextBox x:Name="txtUpdateDeadline" Text="YYYY-MM-DD"/>
+                <ComboBox x:Name="cmbUpdatePriority">
+                    <ComboBoxItem>normal</ComboBoxItem>
+                    <ComboBoxItem>important</ComboBoxItem>
+                    <ComboBoxItem>urgent</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="0" Grid.Row="1">
+            <StackPanel Grid.Column="0" Grid.Row="1">
+                <TextBlock Text="Beszúrás" TextAlignment="Center"/>
+                <Button x:Name="btnInsert" Content="Insert" Click="BtnInsert_Click"/>
+                <TextBox x:Name="txtInsertTitle" Text="Title"/>
+                <TextBox x:Name="txtInsertBody" Text="Body"/>
+                <TextBox x:Name="txtInsertAuthor" Text="Author"/>
+                <TextBox x:Name="txtInsertDeadline" Text="YYYY-MM-DD"/>
+                <ComboBox x:Name="cmbInsertPriority">
+                    <ComboBoxItem>normal</ComboBoxItem>
+                    <ComboBoxItem>important</ComboBoxItem>
+                    <ComboBoxItem>urgent</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="Törlés ID alapján" TextAlignment="Center"/>
+                <Button x:Name="btnDeleteById" Content="Delete By ID" Click="BtnDeleteById_Click"/>
+                <TextBox x:Name="txtDeleteID" Text="ID"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="2" Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="{Binding}" TextAlignment="Center" FontSize="20" x:Name="userInfo"/>
+                <Button x:Name="btnLogout" Content="Kilépés" Click="BtnLogout_Click" Width="100"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

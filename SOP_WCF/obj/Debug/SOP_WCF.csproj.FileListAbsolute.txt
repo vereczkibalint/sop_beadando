@@ -1,0 +1,10 @@
+C:\Users\Balint\source\repos\SOP_WCF\SOP_WCF\bin\SOP_WCF.dll.config
+C:\Users\Balint\source\repos\SOP_WCF\SOP_WCF\bin\SOP_WCF.dll
+C:\Users\Balint\source\repos\SOP_WCF\SOP_WCF\bin\SOP_WCF.pdb
+C:\Users\Balint\source\repos\SOP_WCF\SOP_WCF\obj\Debug\SOP_WCF.csprojAssemblyReference.cache
+C:\Users\Balint\source\repos\SOP_WCF\SOP_WCF\obj\Debug\SOP_WCF.csproj.CoreCompileInputs.cache
+C:\Users\Balint\source\repos\SOP_WCF\SOP_WCF\obj\Debug\SOP_WCF.dll
+C:\Users\Balint\source\repos\SOP_WCF\SOP_WCF\obj\Debug\SOP_WCF.pdb
+C:\Users\Balint\source\repos\SOP_WCF\SOP_WCF\bin\RestSharp.dll
+C:\Users\Balint\source\repos\SOP_WCF\SOP_WCF\bin\RestSharp.xml
+C:\Users\Balint\source\repos\SOP_WCF\SOP_WCF\obj\Debug\SOP_WCF.csproj.CopyComplete

@@ -1,0 +1,13 @@
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\bin\Debug\WCF_HOST.exe.config
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\bin\Debug\WCF_HOST.exe
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\bin\Debug\WCF_HOST.pdb
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\bin\Debug\SOP_WCF.dll
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\bin\Debug\RestSharp.dll
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\bin\Debug\SOP_WCF.pdb
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\bin\Debug\SOP_WCF.dll.config
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\bin\Debug\RestSharp.xml
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\obj\Debug\WCF_HOST.csprojAssemblyReference.cache
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\obj\Debug\WCF_HOST.csproj.CoreCompileInputs.cache
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\obj\Debug\WCF_HOST.csproj.CopyComplete
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\obj\Debug\WCF_HOST.exe
+C:\Users\Balint\source\repos\SOP_WCF\WCF_HOST\obj\Debug\WCF_HOST.pdb

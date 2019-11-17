@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TodoService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:64603/TodoService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:64603/TodoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SOP_WCF" />
+      <xsd:import schemaLocation="http://localhost:64603/TodoService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITodoService_ListAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListAll" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_ListAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_ListAll_LoginFailedFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/SOP_WCF" name="detail" element="q1:LoginFailedFault" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_ListAll_NoAvailableTodoFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/SOP_WCF" name="detail" element="q2:NoAvailableTodoFault" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_ListById_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListById" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_ListById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_ListById_LoginFailedFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/SOP_WCF" name="detail" element="q3:LoginFailedFault" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_ListById_TodoNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/SOP_WCF" name="detail" element="q4:TodoNotFoundFault" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Insert_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insert" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Insert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Insert_LoginFailedFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/SOP_WCF" name="detail" element="q5:LoginFailedFault" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Update_InputMessage">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Update_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Update_LoginFailedFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/SOP_WCF" name="detail" element="q6:LoginFailedFault" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Delete_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Delete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Delete_LoginFailedFaultFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/SOP_WCF" name="detail" element="q7:LoginFailedFault" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Login_LoginFailedFaultFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/SOP_WCF" name="detail" element="q8:LoginFailedFault" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Logout_InputMessage">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Logout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITodoService_Logout_LoginFailedFaultFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/SOP_WCF" name="detail" element="q9:LoginFailedFault" />
+  </wsdl:message>
+  <wsdl:portType name="ITodoService">
+    <wsdl:operation name="ListAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITodoService/ListAll" message="tns:ITodoService_ListAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITodoService/ListAllResponse" message="tns:ITodoService_ListAll_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITodoService/ListAllLoginFailedFaultFault" name="LoginFailedFaultFault" message="tns:ITodoService_ListAll_LoginFailedFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITodoService/ListAllNoAvailableTodoFaultFault" name="NoAvailableTodoFaultFault" message="tns:ITodoService_ListAll_NoAvailableTodoFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITodoService/ListById" message="tns:ITodoService_ListById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITodoService/ListByIdResponse" message="tns:ITodoService_ListById_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITodoService/ListByIdLoginFailedFaultFault" name="LoginFailedFaultFault" message="tns:ITodoService_ListById_LoginFailedFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITodoService/ListByIdTodoNotFoundFaultFault" name="TodoNotFoundFaultFault" message="tns:ITodoService_ListById_TodoNotFoundFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insert">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITodoService/Insert" message="tns:ITodoService_Insert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITodoService/InsertResponse" message="tns:ITodoService_Insert_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITodoService/InsertLoginFailedFaultFault" name="LoginFailedFaultFault" message="tns:ITodoService_Insert_LoginFailedFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITodoService/Update" message="tns:ITodoService_Update_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITodoService/UpdateResponse" message="tns:ITodoService_Update_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITodoService/UpdateLoginFailedFaultFault" name="LoginFailedFaultFault" message="tns:ITodoService_Update_LoginFailedFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITodoService/Delete" message="tns:ITodoService_Delete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITodoService/DeleteResponse" message="tns:ITodoService_Delete_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITodoService/DeleteLoginFailedFaultFault" name="LoginFailedFaultFault" message="tns:ITodoService_Delete_LoginFailedFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITodoService/Login" message="tns:ITodoService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITodoService/LoginResponse" message="tns:ITodoService_Login_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITodoService/LoginLoginFailedFaultFault" name="LoginFailedFaultFault" message="tns:ITodoService_Login_LoginFailedFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITodoService/Logout" message="tns:ITodoService_Logout_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITodoService/LogoutResponse" message="tns:ITodoService_Logout_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITodoService/LogoutLoginFailedFaultFault" name="LoginFailedFaultFault" message="tns:ITodoService_Logout_LoginFailedFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ITodoService" type="tns:ITodoService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListAll">
+      <soap:operation soapAction="http://tempuri.org/ITodoService/ListAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="LoginFailedFaultFault">
+        <soap:fault use="literal" name="LoginFailedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="NoAvailableTodoFaultFault">
+        <soap:fault use="literal" name="NoAvailableTodoFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ListById">
+      <soap:operation soapAction="http://tempuri.org/ITodoService/ListById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="LoginFailedFaultFault">
+        <soap:fault use="literal" name="LoginFailedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TodoNotFoundFaultFault">
+        <soap:fault use="literal" name="TodoNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Insert">
+      <soap:operation soapAction="http://tempuri.org/ITodoService/Insert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="LoginFailedFaultFault">
+        <soap:fault use="literal" name="LoginFailedFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/ITodoService/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="LoginFailedFaultFault">
+        <soap:fault use="literal" name="LoginFailedFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/ITodoService/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="LoginFailedFaultFault">
+        <soap:fault use="literal" name="LoginFailedFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/ITodoService/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="LoginFailedFaultFault">
+        <soap:fault use="literal" name="LoginFailedFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://tempuri.org/ITodoService/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="LoginFailedFaultFault">
+        <soap:fault use="literal" name="LoginFailedFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TodoService">
+    <wsdl:port name="BasicHttpBinding_ITodoService" binding="tns:BasicHttpBinding_ITodoService">
+      <soap:address location="http://localhost:64603/TodoService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
