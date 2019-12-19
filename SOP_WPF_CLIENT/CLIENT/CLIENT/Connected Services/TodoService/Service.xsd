@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:64603/TodoService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SOP_WCF" />
+  <xs:import schemaLocation="http://localhost:9090/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SOP_WCF" />
   <xs:element name="ListAll">
     <xs:complexType>
       <xs:sequence>
@@ -39,6 +39,7 @@
         <xs:element minOccurs="0" name="deadline" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="priority" nillable="true" type="xs:string" />
         <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SOP_WCF" minOccurs="0" name="client" nillable="true" type="q5:UserClient" />
+        <xs:element minOccurs="0" name="header" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -59,6 +60,7 @@
         <xs:element minOccurs="0" name="deadline" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="priority" nillable="true" type="xs:string" />
         <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SOP_WCF" minOccurs="0" name="client" nillable="true" type="q6:UserClient" />
+        <xs:element minOccurs="0" name="header" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -74,6 +76,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
         <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SOP_WCF" minOccurs="0" name="client" nillable="true" type="q7:UserClient" />
+        <xs:element minOccurs="0" name="header" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -41,16 +41,16 @@ namespace CLIENT
                 string password = pswPassword.Password;
                 try
                 {
-                    userClient = client.Login(username, password);
-                    MainWindow mainWindow = new MainWindow(this.client, this.userClient);
-                    mainWindow.Show();
-                    this.Close();
+                    //userClient = client.Login(username, password);
+                    //MainWindow mainWindow = new MainWindow(this.client, this.userClient);
+                    //mainWindow.Show();
+                    //this.Close();
                 }
                 catch(FaultException<LoginFailedFault> ex)
                 {
                     MessageBox.Show(ex.Reason.ToString());
                 }
-                catch(EndpointNotFoundException)
+                catch (EndpointNotFoundException)
                 {
                     MessageBox.Show("Hiba a kiszolgálóval!");
                 }

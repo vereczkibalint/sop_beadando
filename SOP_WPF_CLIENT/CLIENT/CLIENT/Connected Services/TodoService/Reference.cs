@@ -356,24 +356,24 @@ namespace CLIENT.TodoService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITodoService/Insert", ReplyAction="http://tempuri.org/ITodoService/InsertResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(CLIENT.TodoService.LoginFailedFault), Action="http://tempuri.org/ITodoService/InsertLoginFailedFaultFault", Name="LoginFailedFault", Namespace="http://schemas.datacontract.org/2004/07/SOP_WCF")]
-        bool Insert(string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client);
+        bool Insert(string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client, string header);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITodoService/Insert", ReplyAction="http://tempuri.org/ITodoService/InsertResponse")]
-        System.Threading.Tasks.Task<bool> InsertAsync(string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client);
+        System.Threading.Tasks.Task<bool> InsertAsync(string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client, string header);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITodoService/Update", ReplyAction="http://tempuri.org/ITodoService/UpdateResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(CLIENT.TodoService.LoginFailedFault), Action="http://tempuri.org/ITodoService/UpdateLoginFailedFaultFault", Name="LoginFailedFault", Namespace="http://schemas.datacontract.org/2004/07/SOP_WCF")]
-        bool Update(string id, string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client);
+        bool Update(string id, string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client, string header);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITodoService/Update", ReplyAction="http://tempuri.org/ITodoService/UpdateResponse")]
-        System.Threading.Tasks.Task<bool> UpdateAsync(string id, string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client);
+        System.Threading.Tasks.Task<bool> UpdateAsync(string id, string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client, string header);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITodoService/Delete", ReplyAction="http://tempuri.org/ITodoService/DeleteResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(CLIENT.TodoService.LoginFailedFault), Action="http://tempuri.org/ITodoService/DeleteLoginFailedFaultFault", Name="LoginFailedFault", Namespace="http://schemas.datacontract.org/2004/07/SOP_WCF")]
-        bool Delete(string id, CLIENT.TodoService.UserClient client);
+        bool Delete(string id, CLIENT.TodoService.UserClient client, string header);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITodoService/Delete", ReplyAction="http://tempuri.org/ITodoService/DeleteResponse")]
-        System.Threading.Tasks.Task<bool> DeleteAsync(string id, CLIENT.TodoService.UserClient client);
+        System.Threading.Tasks.Task<bool> DeleteAsync(string id, CLIENT.TodoService.UserClient client, string header);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITodoService/Login", ReplyAction="http://tempuri.org/ITodoService/LoginResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(CLIENT.TodoService.LoginFailedFault), Action="http://tempuri.org/ITodoService/LoginLoginFailedFaultFault", Name="LoginFailedFault", Namespace="http://schemas.datacontract.org/2004/07/SOP_WCF")]
@@ -433,28 +433,28 @@ namespace CLIENT.TodoService {
             return base.Channel.ListByIdAsync(id, client);
         }
         
-        public bool Insert(string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client) {
-            return base.Channel.Insert(title, body, author, deadline, priority, client);
+        public bool Insert(string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client, string header) {
+            return base.Channel.Insert(title, body, author, deadline, priority, client, header);
         }
         
-        public System.Threading.Tasks.Task<bool> InsertAsync(string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client) {
-            return base.Channel.InsertAsync(title, body, author, deadline, priority, client);
+        public System.Threading.Tasks.Task<bool> InsertAsync(string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client, string header) {
+            return base.Channel.InsertAsync(title, body, author, deadline, priority, client, header);
         }
         
-        public bool Update(string id, string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client) {
-            return base.Channel.Update(id, title, body, author, deadline, priority, client);
+        public bool Update(string id, string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client, string header) {
+            return base.Channel.Update(id, title, body, author, deadline, priority, client, header);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateAsync(string id, string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client) {
-            return base.Channel.UpdateAsync(id, title, body, author, deadline, priority, client);
+        public System.Threading.Tasks.Task<bool> UpdateAsync(string id, string title, string body, string author, string deadline, string priority, CLIENT.TodoService.UserClient client, string header) {
+            return base.Channel.UpdateAsync(id, title, body, author, deadline, priority, client, header);
         }
         
-        public bool Delete(string id, CLIENT.TodoService.UserClient client) {
-            return base.Channel.Delete(id, client);
+        public bool Delete(string id, CLIENT.TodoService.UserClient client, string header) {
+            return base.Channel.Delete(id, client, header);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteAsync(string id, CLIENT.TodoService.UserClient client) {
-            return base.Channel.DeleteAsync(id, client);
+        public System.Threading.Tasks.Task<bool> DeleteAsync(string id, CLIENT.TodoService.UserClient client, string header) {
+            return base.Channel.DeleteAsync(id, client, header);
         }
         
         public CLIENT.TodoService.UserClient Login(string username, string password) {

@@ -23,15 +23,15 @@ namespace SOP_WCF
 
         [OperationContract]
         [FaultContract(typeof(LoginFailedFault))]
-        bool Insert(string title, string body, string author, string deadline, string priority, UserClient client);
+        bool Insert(string title, string body, string author, string deadline, string priority, UserClient client, string header);
 
         [OperationContract]
         [FaultContract(typeof(LoginFailedFault))]
-        bool Update(string id, string title, string body, string author, string deadline, string priority, UserClient client);
+        bool Update(string id, string title, string body, string author, string deadline, string priority, UserClient client, string header);
 
         [OperationContract]
         [FaultContract(typeof(LoginFailedFault))]
-        bool Delete(string id, UserClient client);
+        bool Delete(string id, UserClient client, string header);
 
         [OperationContract]
         [FaultContract(typeof(LoginFailedFault))]

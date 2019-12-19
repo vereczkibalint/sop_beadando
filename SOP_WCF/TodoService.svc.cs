@@ -16,7 +16,7 @@ namespace SOP_WCF
     {
         private string REST_URL = "http://127.0.0.1/!SOP/";
 
-        public bool Delete(string id, UserClient client)
+        public bool Delete(string id, UserClient client, string header)
         {
             try
             {
@@ -25,9 +25,13 @@ namespace SOP_WCF
                     var restClient = new RestClient(REST_URL);
                     string ROUTE = "index.php?id={id}";
                     var request = new RestRequest(ROUTE, Method.DELETE);
+                    request.AddHeader("todo_header", header);
                     request.AddParameter("id", id);
                     IRestResponse<JSONResponse> response = restClient.Execute<JSONResponse>(request);
-
+                    if(response.Data.Status == "0" && response.Data.Message == "Wrong auth info")
+                    {
+                        throw new LoginFailedException();
+                    }
                     return (response.Data.Status == "1") ? true : false;
                 }
 
@@ -35,7 +39,11 @@ namespace SOP_WCF
             }
             catch (NullReferenceException)
             {
-                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Sikertelen bejelentkezés!"), new FaultReason("Sikertelen bejelentkezés!"));
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
+            }
+            catch (LoginFailedException)
+            {
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
             }
             catch (Exception ex)
             {
@@ -43,7 +51,7 @@ namespace SOP_WCF
             }
         }
 
-        public bool Insert(string title, string body, string author, string deadline, string priority, UserClient client)
+        public bool Insert(string title, string body, string author, string deadline, string priority, UserClient client, string header)
         {
             try
             {
@@ -61,8 +69,14 @@ namespace SOP_WCF
                     var restClient = new RestClient(REST_URL);
                     string ROUTE = "index.php";
                     var request = new RestRequest(ROUTE, Method.POST);
+                    request.AddHeader("todo_header", header);
                     request.AddJsonBody(postBody);
                     IRestResponse<JSONResponse> response = restClient.Execute<JSONResponse>(request);
+
+                    if (response.Data.Status == "0" && response.Data.Message == "Wrong auth info")
+                    {
+                        throw new LoginFailedException();
+                    }
 
                     return (response.Data.Status == "1") ? true : false;
                 }
@@ -71,7 +85,11 @@ namespace SOP_WCF
             }
             catch (NullReferenceException)
             {
-                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Sikertelen bejelentkezés!"), new FaultReason("Sikertelen bejelentkezés!"));
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
+            }
+            catch (LoginFailedException)
+            {
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
             }
             catch (Exception ex)
             {
@@ -99,15 +117,18 @@ namespace SOP_WCF
                         throw new NoAvailableTodoException();
                     }
                 }
-                throw new LoginFailedException();
+                else
+                {
+                    throw new LoginFailedException();
+                }
             }
             catch (NullReferenceException)
             {
-                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Sikertelen bejelentkezés!"), new FaultReason("Sikertelen bejelentkezés!"));
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
             }
             catch (LoginFailedException)
             {
-                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Sikertelen bejelentkezés!"), new FaultReason("Sikertelen bejelentkezés!"));
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
             }
             catch (NoAvailableTodoException)
             {
@@ -139,11 +160,11 @@ namespace SOP_WCF
             }
             catch (NullReferenceException)
             {
-                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Sikertelen bejelentkezés!"), new FaultReason("Sikertelen bejelentkezés!"));
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
             }
             catch (LoginFailedException)
             {
-                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Sikertelen bejelentkezés!"), new FaultReason("Sikertelen bejelentkezés!"));
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
             }
             catch (IncorrectPasswordException)
             {
@@ -181,7 +202,7 @@ namespace SOP_WCF
             }
         }
 
-        public bool Update(string id, string title, string body, string author, string deadline, string priority, UserClient client)
+        public bool Update(string id, string title, string body, string author, string deadline, string priority, UserClient client, string header)
         {
             try
             {
@@ -199,6 +220,7 @@ namespace SOP_WCF
                     var restClient = new RestClient(REST_URL);
                     string ROUTE = "index.php?id={id}";
                     var request = new RestRequest(ROUTE, Method.PUT);
+                    request.AddHeader("todo_header", header);
                     request.AddHeader("accept", "application/json");
                     request.AddHeader("Content-Type", "application/json");
                     request.AddParameter("id", id, ParameterType.QueryString);
@@ -206,13 +228,22 @@ namespace SOP_WCF
 
                     IRestResponse<JSONResponse> response = restClient.Execute<JSONResponse>(request);
 
+                    if (response.Data.Status == "0" && response.Data.Message == "Wrong auth info")
+                    {
+                        throw new LoginFailedException();
+                    }
+
                     return (response.Data.Status == "1") ? true : false;
                 }
                 return false;
             }
             catch (NullReferenceException)
             {
-                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Sikertelen bejelentkezés!"), new FaultReason("Sikertelen bejelentkezés!"));
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
+            }
+            catch (LoginFailedException)
+            {
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
             }
             catch (Exception ex)
             {
@@ -235,7 +266,7 @@ namespace SOP_WCF
             }
             catch (NullReferenceException)
             {
-                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Sikertelen bejelentkezés!"), new FaultReason("Sikertelen bejelentkezés!"));
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
             }
             catch (Exception ex)
             {
@@ -270,11 +301,11 @@ namespace SOP_WCF
             }
             catch (NullReferenceException)
             {
-                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Sikertelen bejelentkezés!"), new FaultReason("Sikertelen bejelentkezés!"));
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
             }
             catch (LoginFailedException)
             {
-                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Sikertelen bejelentkezés!"), new FaultReason("Sikertelen bejelentkezés!"));
+                throw new FaultException<LoginFailedFault>(new LoginFailedFault("Autentikációs hiba!"), new FaultReason("Autentikációs hiba!"));
             }
             catch (TodoNotFoundException)
             {

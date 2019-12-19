@@ -57,6 +57,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\TodoService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -72,11 +77,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Connected Services\TodoService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -107,16 +107,16 @@
     <None Include="Connected Services\TodoService\CLIENT.TodoService.UserClient.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\TodoService\Service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TodoService\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TodoService\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\TodoService\TodoService.wsdl" />
-    <None Include="Connected Services\TodoService\TodoService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\TodoService\TodoService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\TodoService\TodoService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -134,7 +134,7 @@
     <WCFMetadataStorage Include="Connected Services\TodoService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\TodoService\TodoService.disco" />
+    <None Include="Connected Services\TodoService\Service.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\TodoService\configuration91.svcinfo" />

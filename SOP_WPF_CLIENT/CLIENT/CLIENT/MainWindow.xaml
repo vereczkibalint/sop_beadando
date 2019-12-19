@@ -83,6 +83,7 @@
         <Border Grid.Column="2" Grid.Row="1">
             <StackPanel>
                 <TextBlock Text="{Binding}" TextAlignment="Center" FontSize="20" x:Name="userInfo"/>
+                <Button x:Name="btnLogin" Content="Belépés" Click="BtnLogin_Click" Width="100" Margin="0 0 0 20"/>
                 <Button x:Name="btnLogout" Content="Kilépés" Click="BtnLogout_Click" Width="100"/>
             </StackPanel>
         </Border>
