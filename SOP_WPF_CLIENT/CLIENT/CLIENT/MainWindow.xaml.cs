@@ -32,57 +32,39 @@ namespace CLIENT
             btnLogout.IsEnabled = false;
         }
 
-        //private void ForceLogout()
-        //{
-        //    this.userClient = null;
-        //    btnLogin.IsEnabled = true;
-        //    btnLogout.IsEnabled = false;
-        //    userInfo.Text = "Kérlek jelentkezz be!";
-        //}
-
         private void btnListAll_Click(object sender, RoutedEventArgs e)
         {
-            if(this.userClient != null)
+            listBoxAll.Items.Clear();
+            try
             {
-                listBoxAll.Items.Clear();
-                try
+                ICollection<TodoModel> result = client.ListAll(userClient);
+                foreach (TodoModel todo in result)
                 {
-                    ICollection<TodoModel> result = client.ListAll(userClient);
-                    foreach (TodoModel todo in result)
-                    {
-                        ListBoxItem item = new ListBoxItem();
-                        item.Content = todo.todo_id + ";" + todo.todo_title + ";" + todo.todo_body + ";" + todo.todo_author + ";" + todo.todo_deadline + ";" + todo.todo_priority;
-                        item.MouseDoubleClick += Item_MouseDoubleClick;
-                        listBoxAll.Items.Add(item);
-                    }
-                }
-                catch (EndpointNotFoundException)
-                {
-                    MessageBox.Show("Hiba a kiszolgálóval!");
-                    //ForceLogout();
-                }
-                catch (FaultException<LoginFailedFault> ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    //ForceLogout();
-                }
-                catch (FaultException<NoAvailableTodoFault> ex)
-                {
-                    MessageBox.Show(ex.Reason.ToString());
-                }
-                catch (FaultException ex)
-                {
-                    MessageBox.Show("Ismeretlen hiba " + ex.Reason.ToString());
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ismeretlen hiba: " + ex.Message);
+                    ListBoxItem item = new ListBoxItem();
+                    item.Content = todo.todo_id + ";" + todo.todo_title + ";" + todo.todo_body + ";" + todo.todo_author + ";" + todo.todo_deadline + ";" + todo.todo_priority;
+                    item.MouseDoubleClick += Item_MouseDoubleClick;
+                    listBoxAll.Items.Add(item);
                 }
             }
-            else
+            catch (NullReferenceException)
             {
-                MessageBox.Show("Ehhez a funkcióhoz be kell jelentkezni!");
+                MessageBox.Show("A funkció használatához be kell jelentkezni!");
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show("Hiba a kiszolgálóval!");
+            }
+            catch (FaultException<LoginFailedFault> ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (FaultException<NoAvailableTodoFault> ex)
+            {
+                MessageBox.Show(ex.Reason.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ismeretlen hiba: " + ex.Message);
             }
         }
 
@@ -100,211 +82,171 @@ namespace CLIENT
 
         private void btnListById_Click(object sender, RoutedEventArgs e)
         {
-            if(this.userClient != null)
+            if (txtListID.Text.All(char.IsDigit))
             {
-                if (txtListID.Text.All(char.IsDigit))
-                {
-                    listBoxID.Items.Clear();
-                    try
-                    {
-                        ICollection<TodoModel> oneResult = client.ListById(txtListID.Text, userClient);
-                        foreach (TodoModel todo in oneResult)
-                        {
-                            ListBoxItem item = new ListBoxItem();
-                            item.Content = todo.todo_id + ";" + todo.todo_title + ";" + todo.todo_body + ";" + todo.todo_author + ";" + todo.todo_deadline + ";" + todo.todo_priority;
-                            item.MouseDoubleClick += Item_MouseDoubleClick;
-                            listBoxID.Items.Add(item);
-                        }
-                    }
-                    catch (EndpointNotFoundException)
-                    {
-                        MessageBox.Show("Hiba a kiszolgálóval!");
-                        //ForceLogout();
-                    }
-                    catch (FaultException<LoginFailedFault> ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                        //ForceLogout();
-                    }
-                    catch (FaultException<TodoNotFoundFault> ex)
-                    {
-                        MessageBox.Show(ex.Reason.ToString());
-                    }
-                    catch (FaultException ex)
-                    {
-                        MessageBox.Show("Ismeretlen hiba: " + ex.Reason.ToString());
-                    }
-
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Ismeretlen hiba: " + ex.Message);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Ehhez a funkcióhoz be kell jelentkezni!");
-            }
-        }
-
-        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            if(this.userClient != null)
-            {
-                if (txtUpdateID.Text.All(char.IsDigit))
-                {
-                    try
-                    {
-                        string id = txtUpdateID.Text;
-                        string title = txtUpdateTitle.Text;
-                        string body = txtUpdateBody.Text;
-                        string author = txtUpdateAuthor.Text;
-                        string deadline = txtUpdateDeadline.Text;
-                        string priority = cmbUpdatePriority.Text;
-
-                        if (Helper.IsAnyEmptyOrNull(id, title, body, author, deadline, priority))
-                        {
-                            MessageBox.Show("Minden mező kitöltése kötelező!");
-                        }
-                        else
-                        {
-                            bool updateResult = client.Update(id, title, body, author, deadline, priority, userClient, todo_header);
-
-                            if (updateResult)
-                            {
-                                MessageBox.Show("Sikeres adatmódosítás!");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Sikertelen adatmódosítás!");
-                            }
-                        }
-                    }
-                    catch (EndpointNotFoundException)
-                    {
-                        MessageBox.Show("Hiba a kiszolgálóval!");
-                        //ForceLogout();
-                    }
-                    catch (FaultException<LoginFailedFault> ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                        //ForceLogout();
-                    }
-                    catch (FaultException ex)
-                    {
-                        MessageBox.Show("Ismeretlen hiba: " + ex.Reason.ToString());
-                    }
-
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Ismeretlen hiba: " + ex.Message);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Ehhez a funkcióhoz be kell jelentkezni!");
-            }
-        }
-
-        private void BtnInsert_Click(object sender, RoutedEventArgs e)
-        {
-            if(this.userClient != null)
-            {
+                listBoxID.Items.Clear();
                 try
                 {
-                    string title = txtInsertTitle.Text;
-                    string body = txtInsertBody.Text;
-                    string author = txtInsertAuthor.Text;
-                    string deadline = txtInsertDeadline.Text;
-                    string priority = cmbInsertPriority.Text;
-
-                    if (Helper.IsAnyEmptyOrNull(title, body, author, deadline, priority))
+                    ICollection<TodoModel> oneResult = client.ListById(txtListID.Text, userClient);
+                    foreach (TodoModel todo in oneResult)
                     {
-                        MessageBox.Show("Minden mező kitöltése kötelező!");
+                        ListBoxItem item = new ListBoxItem();
+                        item.Content = todo.todo_id + ";" + todo.todo_title + ";" + todo.todo_body + ";" + todo.todo_author + ";" + todo.todo_deadline + ";" + todo.todo_priority;
+                        item.MouseDoubleClick += Item_MouseDoubleClick;
+                        listBoxID.Items.Add(item);
                     }
-                    else
-                    {
-                        bool insertResult = client.Insert(title, body, author, deadline, priority, userClient, todo_header);
-                        if (insertResult)
-                        {
-                            MessageBox.Show("Az adatfelvitel sikeres!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Az adatfelvitel sikertelen!");
-                        }
-                    }
+                }
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show("A funkció használatához be kell jelentkezni!");
                 }
                 catch (EndpointNotFoundException)
                 {
                     MessageBox.Show("Hiba a kiszolgálóval!");
-                    //ForceLogout();
                 }
                 catch (FaultException<LoginFailedFault> ex)
                 {
                     MessageBox.Show(ex.Message);
-                    //ForceLogout();
                 }
-                catch (FaultException ex)
+                catch (FaultException<TodoNotFoundFault> ex)
                 {
-                    MessageBox.Show("Ismeretlen hiba: " + ex.Reason.ToString());
+                    MessageBox.Show(ex.Reason.ToString());
                 }
-
                 catch (Exception ex)
                 {
                     MessageBox.Show("Ismeretlen hiba: " + ex.Message);
                 }
             }
-            else
+        }
+
+        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtUpdateID.Text.All(char.IsDigit))
             {
-                MessageBox.Show("Ehhez a funkcióhoz be kell jelentkezni!");
+                try
+                {
+                    string id = txtUpdateID.Text;
+                    string title = txtUpdateTitle.Text;
+                    string body = txtUpdateBody.Text;
+                    string author = txtUpdateAuthor.Text;
+                    string deadline = txtUpdateDeadline.Text;
+                    string priority = cmbUpdatePriority.Text;
+
+                    if (Helper.IsAnyEmptyOrNull(id, title, body, author, deadline, priority))
+                    {
+                        MessageBox.Show("Minden mező kitöltése kötelező!");
+                    }
+                    else
+                    {
+                        bool updateResult = client.Update(id, title, body, author, deadline, priority, userClient, todo_header);
+
+                        if (updateResult)
+                        {
+                            MessageBox.Show("Sikeres adatmódosítás!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sikertelen adatmódosítás!");
+                        }
+                    }
+                }
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show("A funkció használatához be kell jelentkezni!");
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show("Hiba a kiszolgálóval!");
+                }
+                catch (FaultException<LoginFailedFault> ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ismeretlen hiba: " + ex.Message);
+                }
+            }
+        }
+
+        private void BtnInsert_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string title = txtInsertTitle.Text;
+                string body = txtInsertBody.Text;
+                string author = txtInsertAuthor.Text;
+                string deadline = txtInsertDeadline.Text;
+                string priority = cmbInsertPriority.Text;
+
+                if (Helper.IsAnyEmptyOrNull(title, body, author, deadline, priority))
+                {
+                    MessageBox.Show("Minden mező kitöltése kötelező!");
+                }
+                else
+                {
+                    bool insertResult = client.Insert(title, body, author, deadline, priority, userClient, todo_header);
+                    if (insertResult)
+                    {
+                        MessageBox.Show("Az adatfelvitel sikeres!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Az adatfelvitel sikertelen!");
+                    }
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("A funkció használatához be kell jelentkezni!");
+            }
+            catch (EndpointNotFoundException)
+            {
+                MessageBox.Show("Hiba a kiszolgálóval!");
+            }
+            catch (FaultException<LoginFailedFault> ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ismeretlen hiba: " + ex.Message);
             }
         }
 
         private void BtnDeleteById_Click(object sender, RoutedEventArgs e)
         {
-            if(this.userClient != null)
+            if (txtDeleteID.Text.All(char.IsDigit))
             {
-                if (txtDeleteID.Text.All(char.IsDigit))
+                string deleteID = txtDeleteID.Text;
+                try
                 {
-                    string deleteID = txtDeleteID.Text;
-                    try
+                    bool deleteResult = client.Delete(deleteID, userClient, todo_header);
+                    if (deleteResult)
                     {
-                        bool deleteResult = client.Delete(deleteID, userClient, todo_header);
-                        if (deleteResult)
-                        {
-                            MessageBox.Show("Törlés sikeres!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Törlés sikertelen!");
-                        }
+                        MessageBox.Show("Törlés sikeres!");
                     }
-                    catch (EndpointNotFoundException)
+                    else
                     {
-                        MessageBox.Show("Hiba a kiszolgálóval!");
-                        //ForceLogout();
-                    }
-                    catch (FaultException<LoginFailedFault> ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                        //ForceLogout();
-                    }
-                    catch (FaultException ex)
-                    {
-                        MessageBox.Show("Ismeretlen hiba: " + ex.Reason.ToString());
-                    }
-
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Ismeretlen hiba: " + ex.Message);
+                        MessageBox.Show("Törlés sikertelen!");
                     }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Ehhez a funkcióhoz be kell jelentkezni!");
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show("A funkció használatához be kell jelentkezni!");
+                }
+                catch (EndpointNotFoundException)
+                {
+                    MessageBox.Show("Hiba a kiszolgálóval!");
+                }
+                catch (FaultException<LoginFailedFault> ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ismeretlen hiba: " + ex.Message);
+                }
             }
         }
 
@@ -320,23 +262,18 @@ namespace CLIENT
                     btnLogout.IsEnabled = false;
                     userInfo.Text = "Sikeres kijelentkezés";
                     todo_header = null;
+                    txtInsertAuthor.Text = "";
+                    txtUpdateAuthor.Text = "";
                 }
             }
             catch (EndpointNotFoundException)
             {
                 MessageBox.Show("Hiba a kiszolgálóval!");
-                //ForceLogout();
             }
             catch (FaultException<LoginFailedFault> ex)
             {
                 MessageBox.Show(ex.Message);
-                //ForceLogout();
             }
-            catch(FaultException ex)
-            {
-                MessageBox.Show("Ismeretlen hiba: " + ex.Reason.ToString());
-            }
-            
             catch (Exception ex)
             {
                 MessageBox.Show("Ismeretlen hiba: " + ex.Message);

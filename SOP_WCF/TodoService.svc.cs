@@ -28,14 +28,11 @@ namespace SOP_WCF
                     request.AddHeader("todo_header", header);
                     request.AddParameter("id", id);
                     IRestResponse<JSONResponse> response = restClient.Execute<JSONResponse>(request);
-                    if(response.Data.Status == "0" && response.Data.Message == "Wrong auth info")
-                    {
-                        throw new LoginFailedException();
-                    }
+
                     return (response.Data.Status == "1") ? true : false;
                 }
 
-                return false;
+                throw new LoginFailedException();
             }
             catch (NullReferenceException)
             {
@@ -73,15 +70,10 @@ namespace SOP_WCF
                     request.AddJsonBody(postBody);
                     IRestResponse<JSONResponse> response = restClient.Execute<JSONResponse>(request);
 
-                    if (response.Data.Status == "0" && response.Data.Message == "Wrong auth info")
-                    {
-                        throw new LoginFailedException();
-                    }
-
                     return (response.Data.Status == "1") ? true : false;
                 }
 
-                return false;
+                throw new LoginFailedException();
             }
             catch (NullReferenceException)
             {
@@ -117,10 +109,8 @@ namespace SOP_WCF
                         throw new NoAvailableTodoException();
                     }
                 }
-                else
-                {
-                    throw new LoginFailedException();
-                }
+
+                throw new LoginFailedException();
             }
             catch (NullReferenceException)
             {
@@ -153,10 +143,8 @@ namespace SOP_WCF
                     }
                     return user;
                 }
-                else
-                {
-                    throw new LoginFailedException();
-                }
+
+                throw new LoginFailedException();
             }
             catch (NullReferenceException)
             {
@@ -168,7 +156,7 @@ namespace SOP_WCF
             }
             catch (IncorrectPasswordException)
             {
-                throw new FaultException<IncorrectPasswordFault>(new IncorrectPasswordFault("Helytelen jelszo!"), new FaultReason("Helytelen jelszó!"));
+                throw new FaultException<IncorrectPasswordFault>(new IncorrectPasswordFault("Helytelen jelszó!"), new FaultReason("Helytelen jelszó!"));
             }
             catch (Exception ex)
             {
@@ -228,14 +216,10 @@ namespace SOP_WCF
 
                     IRestResponse<JSONResponse> response = restClient.Execute<JSONResponse>(request);
 
-                    if (response.Data.Status == "0" && response.Data.Message == "Wrong auth info")
-                    {
-                        throw new LoginFailedException();
-                    }
-
                     return (response.Data.Status == "1") ? true : false;
                 }
-                return false;
+
+                throw new LoginFailedException();
             }
             catch (NullReferenceException)
             {
@@ -289,15 +273,11 @@ namespace SOP_WCF
                     {
                         return response.Data;
                     }
-                    else
-                    {
-                        throw new TodoNotFoundException();
-                    }
+
+                    throw new TodoNotFoundException();
                 }
-                else
-                {
-                    throw new LoginFailedException();
-                }
+
+                throw new LoginFailedException();
             }
             catch (NullReferenceException)
             {
